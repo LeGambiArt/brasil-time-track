@@ -17,9 +17,9 @@ The brasil-time-tracker skill enforces:
 
 ## Configuration
 
-Configuration is found in the skill file `${HOME}/.brasil-kairos.conf` or `${HOME}/.config/brasil-kairos.conf`.
+Configuration is found in the skill file `${HOME}/.brasil-kairos.conf`, or `${HOME}/.config/brasil-kairos.conf`, or on the fiel `${PWD}/.env`.
 
-If the configuration file does not exist, create the file as a script to be sourced by other bash scripts with the variables:
+If none of the configuration files exist, create the file as a script to be sourced by other bash scripts with the variables:
   - KAIROS_USER: the kairos username, which always ends with `@redhat.com`. (can be defined from engineers's configuration data)
   - KAIROS_LOGDIR: the directory to store the script logs
   - KARIOS_PDFDIR: the directory to store the PDF tickets provided by Kairos, if this variable is empty, the tickets will not be stored locally.
