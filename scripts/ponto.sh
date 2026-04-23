@@ -21,8 +21,20 @@ die() {
 }
 
 usage() {
-  printf 'Usage: %s [USERNAME]\n' "$(basename ${0})" >&2
-  exit 1
+  printf 'Uso: %s [-h] [-p|-d] [USERNAME]\n' "$(basename ${0})" >&2
+  cat <<EOF >&2
+
+Argumentos:
+
+    USERNAME     Nome do usuário Kairos.
+
+Opções:
+    -h           Show this message and exit
+
+    -d           Verificar dependencias.
+    -p           Resetar senha.
+
+EOF
 }
 
 quiet() {
@@ -43,15 +55,28 @@ check_dependencies() {
     echo "Todas as dependencias satisfeitas."
 }
 
-[[ $# -gt 1 ]] && usage
+if [[ $# -lt 1 ]]
+then
+    usage
+    exit 1
+fi
 
-[[ "$1" == "-p" ]] && shift && RESET_PASS="yes"
+if [[ "$1" == "-h" ]]
+then
+    usage
+    exit 0
+fi
 
 if [[ "$1" == "-d" ]]
 then
-    shift
     check_dependencies
     exit $?
+fi
+
+if [[ "$1" == "-p" ]]
+then
+    shift
+    RESET_PASS="yes"
 fi
 
 [[ $# -gt 1 ]] && usage
