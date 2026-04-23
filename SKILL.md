@@ -1,10 +1,10 @@
 ---
 name: brasil-time-tracker
-description: These are the rules for tracking work time in Brazil
+description: These are the rules for tracking work time in Brazil that should be used in the morning start and end of the day routines.
 license: GPL-3.0-or-later
 metadata:
     author: The Gambiarra Team
-    version: "1.0"
+    version: "1.1"
 ---
 
 ## Brazilian Labor Law Compliance
@@ -33,8 +33,9 @@ When starting the day, after greetings like with "good morning" or "let's start"
 1. Ask if the engineer wants you to:
     1. Register start time in Kairos
     2. Register start and end of day time in Kairos
-2. If answer is (1), run the script `./scripts/ponto.sh`
-3. If answer is (2), run the script `./scripts/bate_ponto.sh`
+    3. Skip this step and/or register time manually in Kairos
+2. If answer is (1), run the script `${CLAUDE_PLUGIN_ROOT}/scripts/ponto.sh`
+3. If answer is (2), run the script `${CLAUDE_PLUGIN_ROOT}/scripts/bate_ponto.sh`
 4. Otherwise, simple remingd the engineer to register his working time in Kairos at "https://dimepkairos.com.br"
 
 ## End of the day
@@ -45,7 +46,7 @@ When engineer is ready to finish the day, with a "good night" or "let's wrap my 
 2. If there's one single entry for the current day, check for the time the register script (`ponto.sh`) was scheduled for execution by using the command `atq`. The end of the day time is the time scheduled for the script to run.
 3. If there's a end of the day time, report it for the engineer, and the source of it.
 4. If there's no end of the day time, ask if the engineer wants you to register end of day time in Kairos.
-5. If engineer says, yes, run the script `./scripts/ponto.sh`.
+5. If engineer says, yes, run the script `${CLAUDE_PLUGIN_ROOT}/scripts/ponto.sh`.
 6. **Always** remind engineer that he can register his working time at "https://dimepkairos.com.br"
 
 ## Lunch break
@@ -54,10 +55,10 @@ If engineer makes any request between 12:00h and 14:00h **always remind the engi
 
 ## Ressetting password
 
-If engineer wants to reset Kairos password, run the script `./scripts/ponto.sh` with the firts argument being `-p`.
+If engineer wants to reset Kairos password, run the script `${CLAUDE_PLUGIN_ROOT}/scripts/ponto.sh` with the firts argument being `-p`.
 
 ## Checking dependencies
 
-To check if all dependencies are met, run `./scripts/ponto.sh -d`.
-For the script `./scripts/bate_ponto.sh`, there's additionally the dependency on commands `at` and `python3`.
+To check if all dependencies are met, run `${CLAUDE_PLUGIN_ROOT}/scripts/ponto.sh -d`.
+For the script `${CLAUDE_PLUGIN_ROOT}/scripts/bate_ponto.sh`, there's additionally the dependency on commands `at` and `python3`.
 Ensure that dependencies are met before using the scripts to track working time.
